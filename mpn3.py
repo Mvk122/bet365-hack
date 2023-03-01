@@ -11,15 +11,16 @@ def workerthing(data, i):
     con = db.default_connection()
     cur = con.cursor()
     for line in data[i]:
-        cur.execute(f"INSERT INTO what(userz, item, order_date) VALUES ('{line[0]}', '{line[1]}', '{line[2]}')")
+        cur.execute(
+            f"INSERT INTO what(userz, item, order_date) VALUES ('{line[0]}', '{line[1]}', '{line[2]}')")
     con.commit()
-
 
 
 def chunkDataset(data, i, chunk_size):
     start = i * chunk_size
     end = start + chunk_size
     return data.iloc[start:end].copy()
+
 
 def main():
     # Constants
@@ -28,9 +29,8 @@ def main():
     npdata = data.to_numpy()
 
     splits = []
-    for i in range(1,NUM_WORKERS):
-        splits.append((len(npdata)//NUM_WORKERS)*i)
-
+    for i in range(1, NUM_WORKERS):
+        splits.append((len(npdata) // NUM_WORKERS) * i)
 
     splt = np.split(npdata, splits)
     startTime = time.time()
@@ -38,14 +38,13 @@ def main():
     workers = []
 
     for i in range(NUM_WORKERS):
-        p = Process(target=workerthing, args=(splt, i),)
+        p = Process(target=workerthing, args=(splt, i), )
         p.start()
         workers.append(p)
-    
-    #wait for workers to finish
+
+    # wait for workers to finish
     for p in workers:
         p.join()
-
 
     endtime = time.time()
 
