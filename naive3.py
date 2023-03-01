@@ -11,7 +11,7 @@ def create_tables(connection):
 
 def insert_row(user, item, date, cursor):
     cursor.execute(f"INSERT INTO what(userz, item, order_date) VALUES ('{user}', '{item}', '{date}')")
-
+    
 
 def main():
     c1 = db.default_connection()
@@ -28,4 +28,5 @@ def main():
         con.commit()
 
 if __name__ == "__main__":
-    cProfile.run("main()")
+    c1 = db.default_connection()
+    create_tables(c1)
