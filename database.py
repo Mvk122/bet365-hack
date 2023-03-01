@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0be92d1 (Mongo DB script)
 from pymongo import MongoClient
 import creds 
 
@@ -32,6 +35,7 @@ if __name__ == "__main__":
                "date": date,
             }
 
+<<<<<<< HEAD
             db.insert_transaction(transaction)
 =======
 from pymongo import MongoClient
@@ -58,3 +62,6 @@ if __name__ == "__main__":
     db = MongoDatabase(creds.db_url)
     db.insert_transaction()
 >>>>>>> 4e0b85c (add mongo script)
+=======
+            db.insert_transaction(transaction)
+>>>>>>> 0be92d1 (Mongo DB script)
