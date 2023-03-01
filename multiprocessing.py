@@ -39,7 +39,7 @@ if __name__ == '__main__':
     # data = pd.read_csv("customer_orders.csv")
     data = pd.read_csv("customer_orders.csv")
     npdata = data.to_numpy()
-    np.split(npdata, NUM_WORKERS)
+    a = np.split(npdata, NUM_WORKERS)
     print(npdata[:10])
     print(type(npdata))
     # add data to shared memory

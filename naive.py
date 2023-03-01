@@ -47,7 +47,9 @@ def insert_row(user, item, date, connection):
     create_transaction(item_id, user_id, date, connection)
 
 with open("customer_orders.csv", "r") as f:
-    for line in f:
+    for line_number, line in enumerate(f):
+        if line_number % 1000 == 0:
+            print(f"Processing line {line_number}")
         user, item, date = line.split(",")
         insert_row(user[1:-1], item[1:-1], date[1:-1], db.default_connection())
 
