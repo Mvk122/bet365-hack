@@ -9,13 +9,21 @@ from pymongo import MongoClient
 
 
 def workerthing(data, i):
+<<<<<<< HEAD:mpn4.py
     cred = "mongodb://localhost:27017"
     client = MongoClient(cred)['Bet365']
     transactions = client["Transactions"]
     trans_list = [{"user" : line[0],"item" : line[1],"date": line[2]} for line in data[i]]
+=======
+    con = db.default_connection()
+    cur = con.cursor()
+    for line in data[i]:
+        cur.execute(
+            f"INSERT INTO what(userz, item, order_date) VALUES ('{line[0]}', '{line[1]}', '{line[2]}')")
+    con.commit()
+>>>>>>> ccb386a (Add format):mpn3.py
 
     transactions.insert_many(trans_list)
-
 
 def chunkDataset(data, i, chunk_size):
     start = i * chunk_size
